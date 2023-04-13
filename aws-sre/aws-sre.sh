@@ -13,8 +13,11 @@ sudo yum -y install terraform
 #####
 cd tf
 
+aws sts get-caller-identity
+
 terraform init
 terraform plan
+aws sts get-caller-identity
 terraform destroy --auto-approve
 terraform apply --auto-approve
 #####
