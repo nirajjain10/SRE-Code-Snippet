@@ -13,6 +13,10 @@ sudo yum -y install terraform
 #####
 cd tf
 
+aws configure set aws_access_key AKIAY7GQ73J5FUXBUZSH --profile eks_profile
+aws configure set aws_secret_access_key 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 --profile eks_profile
+aws configure set region us-east-1
+
 aws sts get-caller-identity
 
 terraform init

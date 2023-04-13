@@ -16,8 +16,7 @@ resource "aws_internet_gateway" "igw" {
 
 provider "aws" {
   region = "us-east-1"
-  access_key = "AKIAY7GQ73J5FIWG33PN"
-  secret_key = "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"
+  profile = "eks_profile"
 }
 
 terraform {
