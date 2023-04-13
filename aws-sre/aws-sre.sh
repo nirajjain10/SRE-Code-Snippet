@@ -40,8 +40,8 @@ aws eks update-kubeconfig --region ${AWS_REGION} --name ${CLUSTER_NAME}
 cd ../
 kubectl apply -f eks-console-full-access.yaml
 eksctl get iamidentitymapping --cluster demo --region=us-east-1
-eksctl create iamidentitymapping --cluster demo --region=us-east-1 --arn arn:aws:iam::616766102138:user/eks-mgr --group eks-console-dashboard-restricted-access-group --no-duplicate-arns
-eksctl create iamidentitymapping --cluster demo --region=us-east-1 --arn arn:aws:iam::616766102138:user/* --group eks-console-dashboard-restricted-access-group --no-duplicate-arns
+eksctl create iamidentitymapping --cluster demo --region=us-east-1 --arn arn:aws:iam::616766102138:user/eks-mgr --group eks-console-dashboard-full-access-group --no-duplicate-arns
+eksctl create iamidentitymapping --cluster demo --region=us-east-1 --arn arn:aws:iam::616766102138:user/* --group eks-console-dashboard-full-access-group --no-duplicate-arns
 kubectl create -f prometheus-operator-crd
 kubectl apply -f prometheus-operator
 sed -i "s?{{amp_url}}?$AMP_ENDPOINT_RW?g" ./prometheus-agent/4-prometheus.yaml
