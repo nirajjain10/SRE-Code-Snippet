@@ -1,6 +1,6 @@
 #!/bin/bash
 #####
-cd aws-sre
+# cd aws-sre
 
 sudo yum -y install openssl
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
@@ -14,14 +14,14 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinu
 sudo yum -y install terraform
 
 #####
-cd aws-sre/tf
+cd tf
 
 terraform init
 terraform plan
 terraform apply
 
 #####
-cd aws-sre
+# cd aws-sre
 unset CLUSTER_NAME
 unset AMP_WORKSPACE_ALIAS
 unset WORKSPACE_ID
@@ -40,7 +40,7 @@ echo $AMP_ENDPOINT_RW
 aws eks update-kubeconfig --region ${AWS_REGION} --name ${CLUSTER_NAME}
 
 #####
-cd aws-sre
+# cd aws-sre
 kubectl create -f prometheus-operator-crd
 kubectl apply -f prometheus-operator
 sed -i "s?{{amp_url}}?$AMP_ENDPOINT_RW?g" ./prometheus-agent/4-prometheus.yaml
@@ -50,7 +50,7 @@ kubectl apply -f cadvisor
 kubectl apply -f kube-state-metrics
 
 ##### CW
-cd aws-sre
+# cd aws-sre
 eksctl create iamserviceaccount --name cloudwatch-agent --namespace amazon-cloudwatch --cluster demo --role-name "eks-demo-iamserviceaccount-CWAgent-Role" --attach-policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy --approve --override-existing-serviceaccounts
 
 kubectl apply -f ./cw-ci/cloudwatch-namespace.yaml
