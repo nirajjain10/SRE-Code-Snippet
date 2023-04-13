@@ -11,9 +11,9 @@ sudo yum install -y yum-utils shadow-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 sudo yum -y install terraform
 #####
-aws configure set aws_access_key AKIAY7GQ73J5FUXBUZSH --profile eks_profile
-aws configure set aws_secret_access_key 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 --profile eks_profile
-aws configure set region us-east-1
+aws configure set aws_access_key "AKIAY7GQ73J5FUXBUZSH" --profile "eks_profile"
+aws configure set aws_secret_access_key "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" --profile "eks_profile"
+aws configure set region "us-east-1"
 
 cd tf
 aws sts get-caller-identity
