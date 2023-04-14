@@ -82,6 +82,7 @@ kubectl apply -f ./cw-ci/prometheus-eks.yaml
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 kubectl create namespace nginx-ingress-sample
 helm install my-nginx ingress-nginx/ingress-nginx --namespace nginx-ingress-sample --set controller.metrics.enabled=true --set-string controller.metrics.service.annotations."prometheus\.io/port"="10254" --set-string controller.metrics.service.annotations."prometheus\.io/scrape"="true"
+sleep 30
 EXTERNAL_IP=`kubectl get service -n nginx-ingress-sample | grep 'LoadBalancer' |  awk '{ print $4 }'`
 SAMPLE_TRAFFIC_NAMESPACE=nginx-sample-traffic
 cat ./nginx-app/nginx-traffic-sample.yaml | sed "s/{{external_ip}}/$EXTERNAL_IP/g" | sed "s/{{namespace}}/$SAMPLE_TRAFFIC_NAMESPACE/g" | kubectl apply -f -

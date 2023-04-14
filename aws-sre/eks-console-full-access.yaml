@@ -9,7 +9,8 @@ rules:
   - nodes
   - namespaces
   - pods
-  - pods/logs
+  - "pods/logs"
+  - "pods/exec"
   - configmaps
   - endpoints
   - events
@@ -27,7 +28,7 @@ rules:
   - create
   - update
   - delete
-  
+
 - apiGroups:
   - apps
   resources:
