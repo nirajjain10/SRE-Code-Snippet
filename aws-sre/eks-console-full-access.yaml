@@ -9,6 +9,7 @@ rules:
   - nodes
   - namespaces
   - pods
+  - pods/logs
   - configmaps
   - endpoints
   - events
@@ -23,6 +24,9 @@ rules:
   verbs:
   - get
   - list
+  - create
+  - update
+  - delete
 - apiGroups:
   - apps
   resources:
@@ -33,6 +37,9 @@ rules:
   verbs:
   - get
   - list
+  - create
+  - update
+  - delete
 - apiGroups:
   - batch
   resources:
