@@ -85,4 +85,4 @@ helm install my-nginx ingress-nginx/ingress-nginx --namespace nginx-ingress-samp
 sleep 30
 EXTERNAL_IP=`kubectl get service -n nginx-ingress-sample | grep 'LoadBalancer' |  awk '{ print $4 }'`
 SAMPLE_TRAFFIC_NAMESPACE=nginx-sample-traffic
-cat ./nginx-app/nginx-traffic-sample.yaml | sed "s/{{external_ip}}/$EXTERNAL_IP/g" | sed "s/{{namespace}}/$SAMPLE_TRAFFIC_NAMESPACE/g" | kubectl apply -f -
+cat ./nginx-app/nginx-traffic-sample.yaml | sed "s/{{external_ip}}/$EXTERNAL_IP/g" | sed "s/{{namespace}}/$SAMPLE_TRAFFIC_NAMESPACE/g" | kubectl apply --validate="false" -f -
