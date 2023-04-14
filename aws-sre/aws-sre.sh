@@ -77,3 +77,10 @@ cat ./cw-ci/cw_dashboard_fluent_bit.json | sed "s/{{YOUR_AWS_REGION}}/${REGION_N
 eksctl create iamserviceaccount --name cwagent-prometheus --namespace amazon-cloudwatch --cluster demo --attach-policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy --approve --override-existing-serviceaccounts
 
 kubectl apply -f ./cw-ci/prometheus-eks.yaml
+####
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+kubectl create namespace nginx-ingress-sample
+helm install my-nginx ingress-nginx/ingress-nginx --namespace nginx-ingress-sample --set controller.metrics.enabled=true --set-string controller.metrics.service.annotations."prometheus\.io/port"="10254" --set-string controller.metrics.service.annotations."prometheus\.io/scrape"="true"
+EXTERNAL_IP=`kubectl get service -n nginx-ingress-sample | grep 'LoadBalancer' |  awk '{ print $4 }'`
+SAMPLE_TRAFFIC_NAMESPACE=nginx-sample-traffic
+cat ./nginx-app/nginx-traffic-sample.yaml | sed "s/{{external_ip}}/$EXTERNAL_IP/g" | sed "s/{{namespace}}/$SAMPLE_TRAFFIC_NAMESPACE/g" | kubectl apply -f -
