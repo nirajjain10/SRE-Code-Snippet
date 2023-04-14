@@ -83,18 +83,25 @@ metadata:
   name: ingress-nginx-demo
   namespace: {{namespace}}
 spec:
+  ingressClassName: nginx
   rules:
   - host: {{external_ip}}
     http:
       paths:
         - path: /apple
+          pathType: Prefix
           backend:
-            serviceName: apple-service
-            servicePort: 5678
+            service:
+              Name: apple-service
+              Port: 
+                number: 5678
         - path: /banana
+          pathType: Prefix
           backend:
-            serviceName: banana-service
-            servicePort: 5678
+            service:
+              Name: banana-service
+              Port:
+                number: 5678
 
 ---
 
