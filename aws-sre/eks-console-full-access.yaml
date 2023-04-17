@@ -9,7 +9,7 @@ rules:
   - nodes
   - namespaces
   - pods
-  - "pods/logs"
+  - "pods/log"
   - "pods/exec"
   - configmaps
   - endpoints
